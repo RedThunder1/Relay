@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary: #0F1117;
+  --primary_accent: #3B82F6;
+  --secondary: #0b0c10;
+  --panels: #1A1D26;
+  --green_accent: #3DFF8E;
+}
+
+* {
+  color: white;
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+body {
+  margin: 0;
+  background-color: var(--secondary);
+}

@@ -1,0 +1,115 @@
+.main_header {
+  height: 40px;
+  width: 100vw;
+  margin: 0;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+}
+
+.left_bar {
+  grid-area: 1 / 1 / 4 / 2;
+  width: 260px;
+  height: calc(100vh - 40px);
+}
+
+.node_list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 150px);
+}
+
+.node_list_panel {
+  position: relative;
+  left: 2.5%;
+  background-color: var(--panels);
+  width: 95%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.settings_tab {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  height: 150px;
+  width: 260px;
+}
+
+.settings_tools_tab {
+  background-color: var(--panels);
+  height: 50px;
+  border-radius: 25px;
+  width: 90%;
+  margin: auto;
+}
+
+.settings_account_tab {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  height: 50px;
+  border-radius: 25px;
+  width: 90%;
+  margin: auto;
+  line-height: 18px;
+  background-color: var(--panels);
+}
+
+#settings_account_picture {
+  height: 100%;
+  width: 50px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  outline: var(--green_accent) 2px solid;
+}
+
+#settings_account_name {
+  width: 75%;
+  padding: 0;
+}
+
+.message_bar {
+  grid-area: 3 / 2 / 4 / 3;
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  width: calc(100vw - 260px);
+  overflow: hidden;
+}
+
+.message_input {
+  font-size: 14px;
+  width: 80%;
+  height: 50px;
+  margin: auto 20px auto 20px;
+  background-color: var(--panels);
+  border: none;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+.message_input:focus {
+  outline: var(--primary_accent) 2px solid;
+}
+
+.message_tools {
+  background-color: var(--panels);
+  margin: auto 20px auto 0;
+  height: 50px;
+  width: 160px;
+  border-radius: 10px;
+}
+
+.center_page {
+  grid-area: 1 / 2 / 3 / 3;
+  height: calc(100vh - 120px);
+  background-color: var(--primary);
+  border-radius: 5px 0 0 5px;
+}
