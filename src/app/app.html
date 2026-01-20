@@ -1,27 +1,35 @@
 <div class="main_header">
-
+  Relay
 </div>
+
 <main class="main">
   <div class="left_bar">
     <div class="node_list">
       <div class="node_list_panel">
+        <div class="node_list_selector">
+          <div class="node_list_selection" (click)="changeListMode()">Nodes</div>
+          <div class="node_list_divider"></div>
+          <div class="node_list_selection" (click)="changeListMode()">Channels</div>
+        </div>
+        <div class="node_list_container">
 
+        </div>
       </div>
     </div>
 
     <div class="settings_tab">
-      <div class="settings_tools_tab"></div>
       <div class="settings_account_tab">
         <div id="settings_account_picture"></div>
         <p id="settings_account_name">Placeholder</p>
       </div>
+      <div class="settings_tools_tab"></div>
     </div>
   </div>
 
   <div class="center_page"></div>
 
   <div class="message_bar">
-    <input type="text" class="message_input" placeholder="message"/>
+    <input type="text" class="message_input" placeholder="Message"/>
     <div class="message_tools">
 
     </div>

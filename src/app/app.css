@@ -2,6 +2,10 @@
   height: 40px;
   width: 100vw;
   margin: 0;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .main {
@@ -34,10 +38,36 @@
   border-radius: 15px;
 }
 
+.node_list_selector {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--primary);
+  height: 5%;
+}
+
+.node_list_selection {
+  margin: 10px auto 10px auto;
+  transition: all ease 0.1s;
+}
+
+.node_list_selection:hover {
+  color: var(--primary_accent);
+  cursor: pointer;
+}
+
+.node_list_divider {
+  border: 1px solid var(--primary);
+}
+
+.node_list_container {
+  height: 95%;
+}
+
 .settings_tab {
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  align-items: flex-end;
+  gap: 0;
   height: 150px;
   width: 260px;
 }
@@ -47,7 +77,7 @@
   height: 50px;
   border-radius: 25px;
   width: 90%;
-  margin: auto;
+  margin: auto auto 15px auto;
 }
 
 .settings_account_tab {
@@ -57,7 +87,7 @@
   height: 50px;
   border-radius: 25px;
   width: 90%;
-  margin: auto;
+  margin: 15px auto 15px auto;
   line-height: 18px;
   background-color: var(--panels);
 }
@@ -88,11 +118,13 @@
   font-size: 14px;
   width: 80%;
   height: 50px;
-  margin: auto 20px auto 20px;
+  margin: 15px 20px 15px 20px;
   background-color: var(--panels);
   border: none;
+  outline: var(--primary_accent) 0 solid;
   border-radius: 10px;
   padding-left: 5px;
+  transition: all ease 0.1s;
 }
 
 .message_input:focus {

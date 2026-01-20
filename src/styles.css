@@ -4,14 +4,16 @@
   --secondary: #0b0c10;
   --panels: #1A1D26;
   --green_accent: #3DFF8E;
+  --red_accent: #FF3221BA;
 }
 
 * {
   color: white;
-  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: sans-serif;
 }
 
 body {
   margin: 0;
   background-color: var(--secondary);
+  overflow: hidden;
 }
