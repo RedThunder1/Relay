@@ -7,11 +7,13 @@
     <div class="node_list">
       <div class="node_list_panel">
         <div class="node_list_selector">
-          <div class="node_list_selection" (click)="changeListMode()">Nodes</div>
+          <div class="node_list_selection" (click)="changeListMode('nodes')">Nodes</div>
           <div class="node_list_divider"></div>
-          <div class="node_list_selection" (click)="changeListMode()">Channels</div>
+          <div class="node_list_selection" (click)="changeListMode('channels')">Channels</div>
+          <div class="node_list_divider"></div>
+          <div class="node_list_selection" (click)="changeListMode('dms')">Dms</div>
         </div>
-        <div class="node_list_container">
+        <div id="node_list_container">
 
         </div>
       </div>
@@ -26,11 +28,20 @@
     </div>
   </div>
 
-  <div class="center_page"></div>
+  <div id="center_page">
 
-  <div class="message_bar">
-    <input type="text" class="message_input" placeholder="Message"/>
-    <div class="message_tools">
+    <div id="channel_settings">
+      <div class="channel_settings_panel">
+        <div class="channel_settings_button" (click)="toggleSettingsMode('users')"> Users</div>
+        <div class="channel_settings_button" (click)="toggleSettingsMode('settings')"> Settings</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="message_bar">
+    <textarea id="message_input" placeholder="Message"></textarea>
+    <div id="message_tools">
 
     </div>
   </div>

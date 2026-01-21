@@ -4,6 +4,7 @@
   --secondary: #0b0c10;
   --panels: #1A1D26;
   --green_accent: #3DFF8E;
+  --orange_accent: #ff891a;
   --red_accent: #FF3221BA;
 }
 
@@ -16,4 +17,50 @@ body {
   margin: 0;
   background-color: var(--secondary);
   overflow: hidden;
+}
+
+.list_node {
+  min-height: 50px;
+  max-height: 50px;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.list_node_img {
+  background-color: var(--secondary);
+  width: 50px;
+  aspect-ratio: 1/1;
+
+  border-radius: 50%;
+  grid-area: 1 / 1 / 3 / 2;
+}
+
+.list_node_name {
+  position: relative;
+  right: 50%;
+  grid-area: 1 / 2 / 2 / 3;
+  line-height: 30px;
+  font-size: 14px;
+}
+
+.list_node_info {
+  position: relative;
+  right: 50%;
+  grid-area: 2 / 2 / 3 / 3;
+  line-height: 25px;
+  font-size: 12px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.list_channel {
+  background-color: var(--primary);
+  height: 20px;
+}
+
+.list_channel_settings {
+
 }

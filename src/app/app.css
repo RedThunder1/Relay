@@ -59,8 +59,18 @@
   border: 1px solid var(--primary);
 }
 
-.node_list_container {
+#node_list_container {
   height: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: scroll;
+}
+
+.list_node {
+  background-color: green;
+  height: 50px;
+  width: 100%;
 }
 
 .settings_tab {
@@ -105,19 +115,20 @@
   padding: 0;
 }
 
-.message_bar {
+#message_bar {
   grid-area: 3 / 2 / 4 / 3;
   display: flex;
   flex-direction: row;
   height: 80px;
   width: calc(100vw - 260px);
   overflow: hidden;
+  transition: all ease 0.3s;
 }
 
-.message_input {
+#message_input {
   font-size: 14px;
   width: 80%;
-  height: 50px;
+  min-height: 50px;
   margin: 15px 20px 15px 20px;
   background-color: var(--panels);
   border: none;
@@ -125,13 +136,14 @@
   border-radius: 10px;
   padding-left: 5px;
   transition: all ease 0.1s;
+  resize: none;
 }
 
-.message_input:focus {
+#message_input:focus {
   outline: var(--primary_accent) 2px solid;
 }
 
-.message_tools {
+#message_tools {
   background-color: var(--panels);
   margin: auto 20px auto 0;
   height: 50px;
@@ -139,9 +151,41 @@
   border-radius: 10px;
 }
 
-.center_page {
+#center_page {
   grid-area: 1 / 2 / 3 / 3;
-  height: calc(100vh - 120px);
+  min-height: calc(100vh - 120px);
   background-color: var(--primary);
-  border-radius: 5px 0 0 5px;
+  border-radius: 15px 0 0 15px;
+}
+
+#channel_settings {
+  background-color: var(--panels);
+  height: 50px;
+  width: 125px;
+  position: absolute;
+  right: 0;
+  border-radius: 15px 0 0 15px;
+  transition: all ease-in-out 0.3s;
+
+}
+
+.channel_settings_panel {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.channel_settings_button {
+  height: 50px;
+  width: fit-content;
+  border-right: 2px solid var(--primary);
+  line-height: 50px;
+  padding: 0 5px 0 5px;
+}
+
+.channel_settings_button:hover {
+  color: var(--primary_accent);
+  cursor: pointer;
 }
