@@ -25,8 +25,8 @@ body {
   width: 100%;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 2fr;
+  grid-template-rows: 2fr;
 }
 
 .list_node_img {
@@ -40,7 +40,7 @@ body {
 
 .list_node_name {
   position: relative;
-  right: 50%;
+  right: 120%;
   grid-area: 1 / 2 / 2 / 3;
   line-height: 30px;
   font-size: 14px;
@@ -48,7 +48,7 @@ body {
 
 .list_node_info {
   position: relative;
-  right: 50%;
+  right: 120%;
   grid-area: 2 / 2 / 3 / 3;
   line-height: 25px;
   font-size: 12px;
@@ -63,4 +63,34 @@ body {
 
 .list_channel_settings {
 
+}
+
+.user_message {
+  display: grid;
+  grid-template-columns: 2fr;
+  grid-template-rows: 2fr;
+  width: fit-content;
+}
+
+.user_message_img {
+  background-color: var(--secondary);
+  width: 40px;
+  aspect-ratio: 1/1;
+
+  border-radius: 50%;
+
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin-right: 5px;
+}
+.user_message_name {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: left;
+  font-size: 14px;
+}
+.user_message_content {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 14px;
 }
