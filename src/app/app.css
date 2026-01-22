@@ -2,10 +2,15 @@
   height: 40px;
   width: 100vw;
   margin: 0;
-  text-align: center;
   line-height: 40px;
   font-size: 20px;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
+}
+
+.main_header > img {
+  padding-right: 5px;
 }
 
 .main {

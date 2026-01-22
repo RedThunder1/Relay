@@ -8,6 +8,12 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "assets": [
+    {
+      "glob": "**/*",
+      "input": "public"
+    }
+  ],
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
