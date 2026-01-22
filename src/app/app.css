@@ -163,20 +163,22 @@
 #center_page {
   grid-area: 1 / 2 / 3 / 3;
   min-height: calc(100vh - 120px);
+  height: calc(100vh - 120px);
+  max-height: calc(100vh - 120px);
   background-color: var(--primary);
   border-radius: 15px 0 0 15px;
   position: relative;
-  z-index: 1;
   box-sizing: border-box;
   padding: 5px;
 }
 
 #center_page_messages {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 5px;
   height: 100%;
-  justify-content: flex-end;
+  max-height: 100%;
+  overflow: scroll;
 }
 
 #channel_settings {

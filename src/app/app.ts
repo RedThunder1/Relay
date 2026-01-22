@@ -79,7 +79,6 @@ export class App implements OnInit {
   }
 
   messageBoxHeight(): void {
-    console.log('messageBoxHeight');
     this.messageInput!!.style.height = this.messageInput!!.scrollHeight + "px"
   }
 
@@ -96,14 +95,19 @@ export class App implements OnInit {
   }
 
   sendMessage(name:string, content: string): void {
-    let message = "<div class=\"user_message\"><div class=\"user_message_img\"></div><div class=\"user_message_name\">" + name + "</div><div class=\"user_message_content\">" + content + "</div></div>"
+
+    const d = new Date();
+    let time = d.getMonth()+1 + ' / ' + d.getDate() + ' ' + d.toLocaleTimeString();
+
+    let message = "<div class=\"user_message\"><div class=\"user_message_img\"></div><div class=\"user_message_name\">" + name + "<div class=\"user_message_time\">" + time + "</div> </div><div class=\"user_message_content\">" + content + "</div></div>"
     //server stuff here
 
     this.addMessage(message);
   }
 
   addMessage(message: string): void {
-    console.log(message);
-    this.pageMessages!!.innerHTML += message;
+    //Check if previous message is the same user and similar time
+
+    this.pageMessages!!.innerHTML = message + this.pageMessages!!.innerHTML;
   }
 }
