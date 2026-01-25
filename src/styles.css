@@ -72,6 +72,14 @@ body {
   width: fit-content;
 }
 
+.shortened_msg {
+  padding: 0;
+  margin: 0 0 0 45px;
+  height: 14px;
+  display: flex;
+  flex-direction: row;
+}
+
 .user_message_img {
   background-color: var(--secondary);
   width: 40px;
@@ -83,6 +91,7 @@ body {
   grid-row: 1 / span 2;
   margin-right: 5px;
 }
+
 .user_message_name {
   grid-column: 2;
   grid-row: 1;
@@ -91,10 +100,21 @@ body {
   display: flex;
   flex-direction: row;
 }
+
 .user_message_content {
   grid-column: 2;
   grid-row: 2;
   font-size: 14px;
+}
+
+.shortened_msg_time {
+  opacity: 0;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.user_message_content:hover + .shortened_msg_time {
+  opacity: 50%;
 }
 
 .user_message_time {

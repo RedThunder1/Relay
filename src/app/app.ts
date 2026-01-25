@@ -80,6 +80,7 @@ export class App implements OnInit {
   }
 
   messageBoxHeight(): void {
+    this.messageInput!!.style.height = "auto"
     this.messageInput!!.style.height = this.messageInput!!.scrollHeight + "px"
   }
 
@@ -100,15 +101,27 @@ export class App implements OnInit {
     const d = new Date();
     let time = d.getMonth()+1 + ' / ' + d.getDate() + ' ' + d.toLocaleTimeString();
 
-    let message = "<div class=\"user_message\"><div class=\"user_message_img\"></div><div class=\"user_message_name\">" + name + "<div class=\"user_message_time\">" + time + "</div> </div><div class=\"user_message_content\">" + content + "</div></div>"
-    //server stuff here
+    //Get previous messages sender to check if the message will be shortened
+    let prevUser: string | null = null;
+    try {
+      prevUser = this.pageMessages!!.children[0].getAttribute('data-user');
+    } catch (e) {}
 
-    this.addMessage(message);
-  }
+    //compares to see if previous messages was sent by the same user to save space
+    let message = ""
+    if (prevUser != null && prevUser == 'RedThunder117') {
+      message = "<div class='user_message shortened_msg' data-user=" + name + " data-time=" + time + "><div class=\"user_message_content\">" + content + "</div><div class='shortened_msg_time'>" + time + "</div></div>"
+    } else {
+      message = "<div class='user_message' data-user=" + name + "><div class=\"user_message_img\"></div><div class=\"user_message_name\">" + name + " <div class=\"user_message_time\">" + time + "</div> </div><div class=\"user_message_content\">" + content + "</div></div>"
+    }
 
-  addMessage(message: string): void {
-    //Check if previous message is the same user and similar time
+    //Send msg to server
+
 
     this.pageMessages!!.innerHTML = message + this.pageMessages!!.innerHTML;
+  }
+
+  addMessage(content: string): void {
+    //method for adding msgs from the server once I get to the backend
   }
 }
