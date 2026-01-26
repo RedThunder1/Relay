@@ -31,6 +31,7 @@ export class App implements OnInit {
   }
 
   changeListMode(mode: string): void {
+    this.container!!.innerHTML = '';
     if (mode == 'nodes') {
       //Displays Nodes
       //Fetch users nodes / folders
@@ -38,16 +39,34 @@ export class App implements OnInit {
 
       //Load nodes in panel
       //Placeholder node
-      this.container!!.innerHTML = '<div class="list_node"> <div class="list_node_img"></div> <div class="list_node_name">placeholder</div> <div class="list_node_info">info placeholder</div> </div>';
+      this.container!!.innerHTML = `<div class="list_node"> <div class="list_node_img"></div> <div class="list_node_name">placeholder</div> <div class="list_node_info">info placeholder</div> </div>`;
     } else if (mode == 'channels') {
       //Displays channels
 
       //Placeholder channels
-      this.container!!.innerHTML = '<div class="list_channel">channel name</div>';
+      let channelCont = document.createElement('div');
+      channelCont.innerHTML = `Section 1 <div class="list_channel">channel name</div>`;
+      channelCont.classList.add('list_channel_section');
+      channelCont.addEventListener('click', (event) => {
+        if (channelCont != event.target) { return }
+        this.sectionToggleHide(channelCont);
+      })
+
+      this.container!!.appendChild(channelCont);
     } else {
       //Displays Dms
       //Placeholder dms
-      this.container!!.innerHTML = '<div class="list_node"> <div class="list_node_img" style="border: 2px solid var(--green_accent)"></div> <div class="list_node_name">placeholder</div> <div class="list_node_info">info placeholder</div> </div>';
+      this.container!!.innerHTML = `<div class="list_node"> <div class="list_node_img" style="border: 2px solid var(--green_accent)"></div> <div class="list_node_name">placeholder</div> <div class="list_node_info">info placeholder</div> </div>`;
+    }
+  }
+
+  sectionToggleHide(div: HTMLDivElement): void {
+    console.log(div);
+    if (div.children == null) {
+      return
+    }
+    for (let child of div.children) {
+      child.classList.toggle('hide');
     }
   }
 
@@ -94,6 +113,7 @@ export class App implements OnInit {
       this.sendMessage('RedThunder117', this.messageInput!!.value)
     }
     this.messageInput!!.value = '';
+    this.messageBoxHeight()
   }
 
   sendMessage(name:string, content: string): void {

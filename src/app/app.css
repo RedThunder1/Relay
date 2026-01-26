@@ -32,6 +32,7 @@
   flex-direction: column;
   width: 100%;
   height: calc(100% - 150px);
+
 }
 
 .node_list_panel {
