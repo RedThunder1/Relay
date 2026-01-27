@@ -218,3 +218,20 @@
   color: var(--primary_accent);
   cursor: pointer;
 }
+
+#error_message_panel {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  height: 50px;
+  min-width: 150px;
+  line-height: 50px;
+  text-align: center;
+  padding: 10px;
+  background-color: var(--red_accent);
+  border-radius: 15px;
+  z-index: 5;
+  transition: all ease-in-out 0.3s;
+  opacity: 0;
+}

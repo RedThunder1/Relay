@@ -1,6 +1,7 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,9 @@ export class App implements OnInit {
   messageInput: HTMLTextAreaElement | undefined;
   messageTools: HTMLElement | undefined;
   pageMessages: HTMLElement | undefined;
+  errorPanel: HTMLElement | undefined;
 
+  private http = inject(HttpClient);
 
   ngOnInit(): void {
     this.container = document.getElementById('node_list_container')!!;
@@ -26,6 +29,7 @@ export class App implements OnInit {
     this.messageInput = document.getElementById('message_input')!! as HTMLTextAreaElement;
     this.messageTools = document.getElementById('message_tools')!!;
     this.pageMessages = document.getElementById('center_page_messages')!!;
+    this.errorPanel = document.getElementById('error_message_panel')!!;
 
     this.changeListMode('channels')
   }
@@ -116,7 +120,7 @@ export class App implements OnInit {
     this.messageBoxHeight()
   }
 
-  sendMessage(name:string, content: string): void {
+  async sendMessage(name: string, content: string): Promise<void> {
 
     const d = new Date();
     let time = d.getMonth()+1 + ' / ' + d.getDate() + ' ' + d.toLocaleTimeString();
@@ -128,7 +132,7 @@ export class App implements OnInit {
     } catch (e) {}
 
     //compares to see if previous messages was sent by the same user to save space
-    let message = ""
+    let message: string
     if (prevUser != null && prevUser == 'RedThunder117') {
       message = "<div class='user_message shortened_msg' data-user=" + name + " data-time=" + time + "><div class=\"user_message_content\">" + content + "</div><div class='shortened_msg_time'>" + time + "</div></div>"
     } else {
@@ -136,9 +140,18 @@ export class App implements OnInit {
     }
 
     //Send msg to server
+    this.http.post('http://localhost:3000/api/test', {title: 'test', body: 'this is a test post'}).subscribe({
+      error: () => {
+        console.error('There was an error sending the message!')
+        this.errorPanel!!.style.opacity = '1';
+        this.errorPanel!!.innerText = 'There was an error sending the message!';
+        setTimeout(() => { this.errorPanel!!.style.opacity = '' }, 5000);
+      }
+    })
 
-
+    //Only adds message if it is sent properly
     this.pageMessages!!.innerHTML = message + this.pageMessages!!.innerHTML;
+
   }
 
   addMessage(content: string): void {
