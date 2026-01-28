@@ -1,24 +1,38 @@
 const express = require('express')
 const cors = require('cors')
+const WebSocket = require('ws');
 const app = express()
 
-app.use(cors({
-  origin: true
-}))
+app.use(
+  cors({origin: true}),
+  express.json()
+)
 
-app.post('/api/test', (req, res) => {
-  const data = req.body
-  console.log(data)
+const socket = new WebSocket.Server({port: 8080})
+socket.on('connection', (ws)=>{
+  console.log('Websocket Connected')
+  ws.send('asdasd')
 
-  if (data) {
-    res.status(201).json({
-      message: 'Data stuff'
+  ws.on('close', ()=>{
+    console.log('Websocket Closed')
+  })
+  ws.onerror = (error) => {
+    console.error("WebSocket error:", error);
+  };
+  ws.on('message', (message) => {
+    let pMessage = JSON.parse(message)
+    console.log('received message ', pMessage);
+    // Echo the message back to the client
+    socket.clients.forEach(client => {
+      ws.send(JSON.stringify({
+        type: 'message',
+        user: pMessage.user,
+        time: pMessage.time,
+        message: pMessage.message,
+      }));
     })
-  } else {
-    res.status(400).send('No data provided')
-  }
+  });
 
-  console.log('recieved message')
 })
 
 app.listen(3000, () => {
