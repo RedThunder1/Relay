@@ -3,6 +3,7 @@
   --primary_accent: #3B82F6;
   --secondary: #0b0c10;
   --panels: #1A1D26;
+  --panels_secondary: #2a2e3a;
   --green_accent: #3DFF8E;
   --orange_accent: #ff891a;
   --red_accent: #FF3221BA;
@@ -23,6 +24,12 @@ body {
   display: none;
 }
 
+.centered {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .list_node {
   min-height: 50px;
   max-height: 50px;
@@ -31,6 +38,13 @@ body {
   display: grid;
   grid-template-columns: 2fr;
   grid-template-rows: 2fr;
+  transition: all 0.3s ease-in-out;
+}
+
+.list_node:hover {
+  background-color: #303f59;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .list_node_img {
@@ -44,7 +58,7 @@ body {
 
 .list_node_name {
   position: relative;
-  right: 120%;
+  right: 80px;
   grid-area: 1 / 2 / 2 / 3;
   line-height: 30px;
   font-size: 14px;
@@ -52,12 +66,13 @@ body {
 
 .list_node_info {
   position: relative;
-  right: 120%;
+  right: 80px;
   grid-area: 2 / 2 / 3 / 3;
   line-height: 25px;
   font-size: 12px;
   font-style: italic;
   color: rgba(255, 255, 255, 0.5);
+  overflow: scroll;
 }
 
 .list_channel_settings {
@@ -139,4 +154,82 @@ body {
 .user_message_time {
   padding-left: 10px;
   opacity: 50%;
+}
+
+.account_form_input {
+  height: 40px;
+  background-color: var(--panels);
+  border-radius: 10px;
+  border: 2px solid var(--panels_secondary);
+  outline: 0 solid var(--primary_accent);
+  transition: all ease-in-out 0.2s;
+}
+
+#account_panel_login {
+  width: 50%;
+  height: 100%;
+  background: var(--panels_secondary);
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#account_panel_login > h2 {
+  text-align: center;
+}
+
+#account_panel_login > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account_form_input:focus {
+  outline: 2px solid var(--primary_accent);
+}
+
+#account_form_submit {
+  height: 40px;
+  background-color: var(--panels);
+  border-radius: 10px;
+  border: none;
+  transition: all ease-in-out 0.2s;
+  outline: 0 solid var(--primary_accent);
+  font-size: 18px;
+}
+
+.account_form_submit:hover {
+  outline: 2px solid var(--primary_accent);
+}
+
+.account_create_button {
+  height: 40px;
+  line-height: 40px;
+  width: 140px;
+  text-align: center;
+  background-color: var(--panels);
+  margin: 10px auto 0 auto;
+  border-radius: 10px;
+  outline: 0 solid var(--primary_accent);
+}
+
+.account_create_button:hover {
+  outline: 2px solid var(--primary_accent);
+}
+
+#error_message_panel {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%);
+  height: 50px;
+  min-width: 150px;
+  line-height: 50px;
+  text-align: center;
+  padding: 10px;
+  background-color: var(--red_accent);
+  border-radius: 15px;
+  z-index: 5;
+  transition: all ease-in-out 0.3s;
+  opacity: 0;
 }

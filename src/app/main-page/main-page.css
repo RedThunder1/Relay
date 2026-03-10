@@ -1,0 +1,234 @@
+.main_header {
+  height: 40px;
+  width: 100vw;
+  margin: 0;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+}
+
+.main_header > img {
+  padding-right: 5px;
+}
+
+#appname {
+  position: absolute;
+  left: 40px;
+  font-size: 20px;
+  margin: 0;
+}
+
+#servername {
+  position: absolute;
+  right: 50%;
+  font-size: 20px;
+  margin: 0;
+}
+
+#main {
+  display: grid;
+  grid-template-columns: 2fr;
+  grid-template-rows: 3fr;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+}
+
+.left_bar {
+  grid-area: 1 / 1 / 4 / 2;
+  width: 260px;
+  height: calc(100vh - 40px);
+}
+
+.node_list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 150px);
+
+}
+
+.node_list_panel {
+  position: relative;
+  left: 2.5%;
+  background-color: var(--panels);
+  width: 95%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.node_list_selector {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--primary);
+  height: 5%;
+}
+
+.node_list_selection {
+  margin: 10px auto 10px auto;
+  transition: all ease 0.1s;
+}
+
+.node_list_selection:hover {
+  color: var(--primary_accent);
+  cursor: pointer;
+}
+
+.node_list_divider {
+  border: 1px solid var(--primary);
+}
+
+#node_list_container {
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: scroll;
+}
+
+.list_node {
+  background-color: green;
+  height: 50px;
+  width: 100%;
+}
+
+.settings_tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  height: 150px;
+  width: 260px;
+}
+
+.settings_tools_tab {
+  background-color: var(--panels);
+  height: 50px;
+  border-radius: 25px;
+  width: 90%;
+  margin: auto auto 15px auto;
+}
+
+.settings_account_tab {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  height: 50px;
+  border-radius: 25px;
+  width: 90%;
+  margin: 15px auto 15px auto;
+  line-height: 18px;
+  background-color: var(--panels);
+}
+
+#settings_account_picture {
+  height: 100%;
+  width: 50px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  outline: var(--green_accent) 2px solid;
+}
+
+#settings_account_name {
+  width: 75%;
+  padding: 0;
+}
+
+#message_bar {
+  grid-area: 3 / 2 / 4 / 3;
+  display: grid;
+  grid-template-columns: 2fr;
+  grid-template-rows: 1fr;
+  height: 80px;
+  width: calc(100vw - 260px);
+  overflow: hidden;
+  transition: all ease 0.3s;
+}
+
+#message_input {
+  font-size: 16px;
+  width: calc(100% - 475px);
+  min-height: 50px;
+  max-height: 200px;
+  margin-left: 15px;
+  background-color: var(--panels);
+  border: none;
+  outline: var(--primary_accent) 0 solid;
+  border-radius: 10px;
+  transition: all ease 0.1s;
+  resize: none;
+  position: absolute;
+  bottom: 15px;
+  z-index: 2;
+  overflow: scroll;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+#message_input:focus {
+  outline: var(--primary_accent) 2px solid;
+}
+
+#message_tools {
+  grid-column: 2;
+  background-color: var(--panels);
+  margin: auto 10px auto 0;
+  height: 50px;
+  width: 160px;
+  border-radius: 10px;
+}
+
+#center_page {
+  grid-area: 1 / 2 / 3 / 3;
+  min-height: calc(100vh - 120px);
+  height: calc(100vh - 120px);
+  max-height: calc(100vh - 120px);
+  background-color: var(--primary);
+  border-radius: 15px 0 0 15px;
+  position: relative;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+#center_page_messages {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 5px;
+  height: 100%;
+  max-height: 100%;
+  overflow: scroll;
+}
+
+#channel_settings {
+  background-color: var(--panels);
+  height: 50px;
+  width: 125px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 15px 0 0 15px;
+  transition: all ease-in-out 0.3s;
+
+}
+
+.channel_settings_panel {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.channel_settings_button {
+  height: 50px;
+  width: fit-content;
+  border-right: 2px solid var(--primary);
+  line-height: 50px;
+  padding: 0 5px 0 5px;
+}
+
+.channel_settings_button:hover {
+  color: var(--primary_accent);
+  cursor: pointer;
+}
