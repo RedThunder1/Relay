@@ -28,6 +28,8 @@ socket.on('connection', (ws)=>{
         type: 'message',
         user: pMessage.user,
         time: pMessage.time,
+        server: pMessage.server,
+        channel: pMessage.channel,
         message: pMessage.message,
       }));
     })

@@ -5,14 +5,16 @@ import {Channel} from '../Channel/Channel';
 export class ServerNode {
 
   private name: string;
+  private serverID: string;
   private owner: User;
   private channels: Array<Channel>;
   private users: Array<User>;
   private desc: string;
 
 
-  constructor(name: string, owner : User, desc: string) {
+  constructor(name: string, serverID: string, owner : User, desc: string) {
     this.name = name;
+    this.serverID = serverID;
     this.owner = owner;
     this.channels = [];
     this.users = [];
@@ -23,6 +25,8 @@ export class ServerNode {
 
   public getName(): string {return this.name;}
   public setName(name: string) {this.name = name;}
+
+  public getServerID(): string {return this.serverID;}
 
   public getOwner(): User {return this.owner;}
   public setOwner(owner: User) {return this.owner = owner;}

@@ -13,6 +13,14 @@ import {Channel} from '../../Util/Channel/Channel';
   templateUrl: './main-page.html',
   styleUrl: './main-page.css',
 })
+
+/* TODO:
+ * Clean up this class, Its getting to cluttered.
+ * Rework how channels are handled, I made them a bit stupid.
+ *
+ */
+
+
 export class MainPage implements OnInit {
   protected readonly title = signal('Relay');
   container!: HTMLElement;
@@ -28,6 +36,7 @@ export class MainPage implements OnInit {
   testUser!: User;
 
   activeServer: ServerNode | undefined;
+  activeChannel: Channel | undefined;
 
   ngOnInit(): void {
     //Frequently used elements
@@ -42,7 +51,7 @@ export class MainPage implements OnInit {
 
     this.testUser = new User('RedThunder', 'testuuid', 'email', 'pass')
 
-    let testServer = new ServerNode("Dev Channel", this.testUser, 'This is a dev server!')
+    let testServer = new ServerNode("Dev Channel", 'testuuid', this.testUser, 'This is a dev server!')
     testServer.addChannel(new Channel('Test channel 1', undefined))
     testServer.addChannel(new Channel('Test channel 2', 'Section 1'))
     testServer.addChannel(new Channel('Test channel 3', 'Section 2'))
@@ -122,6 +131,8 @@ export class MainPage implements OnInit {
         node.innerHTML = `<div class="list_node_img"></div> <div class="list_node_name">` + server.getName() + `</div> <div class="list_node_info">` + server.getDesc() + `</div>`;
         node.addEventListener('click', (event) => {
           this.activeServer = server;
+          this.changeListMode('channels')
+          document.getElementById('servername')!.innerText = server.getName();
         })
         this.container.appendChild(node);
 
@@ -137,12 +148,15 @@ export class MainPage implements OnInit {
         chtml.className = 'list_channel';
         chtml.innerText = channel.name;
 
+        chtml.addEventListener('click', (event) => {
+          this.activeChannel = channel;
+          document.getElementById('servername')!.innerHTML = this.activeServer?.getName() + " " + `<p style='opacity: 40%; display: inline-block; margin: 0;'>` + channel.name + `</p>`;
+        })
+
         if (channel.section !== undefined) {
           if (channel.section in sections.keys()) {
-            console.log('adding to section')
             sections.get(channel.section)?.appendChild(chtml)
           } else {
-            console.log('creating new section')
             let sectionhtml = document.createElement('div')
             sectionhtml.className = 'list_channel_section';
 
@@ -175,6 +189,11 @@ export class MainPage implements OnInit {
     if (mode == this.currentSettingsMode)  {
       this.panel.style.height = "";
       this.panel.style.width = "";
+      for (let child of this.panel.children) {
+        if (child.id === 'user_list') {
+          child.remove();
+        }
+      }
 
       this.messageInput.style.display = "";
       this.messageTools.style.display = "";
@@ -187,6 +206,8 @@ export class MainPage implements OnInit {
 
       this.messageInput.style.display = "";
       this.messageTools.style.display = "";
+
+      this.displayUsers()
     } else if (mode == 'settings') {
       this.panel.style.height = this.centerPage.offsetHeight.toString() + "px";
       this.panel.style.width = this.centerPage.offsetWidth.toString() + "px";
@@ -217,6 +238,10 @@ export class MainPage implements OnInit {
   }
 
   async sendMessage(name: string, content: string): Promise<void> {
+
+    //Message bar will be hidden when not in an active channel
+    if (this.activeServer == undefined || this.activeChannel == undefined) { return; }
+
     //Sends message data to backend
     const d = new Date();
     let time = d.getMonth()+1 + ' / ' + d.getDate() + ' ' + d.toLocaleTimeString();
@@ -224,12 +249,14 @@ export class MainPage implements OnInit {
     //Send msg to server
     try {
       this.websocket.send(JSON.stringify({
-        user:'RedThunder117',
+        user: this.testUser.getUserID(),
         time: time,
+        server: this.activeServer!.getServerID(),
+        channel: this.activeChannel?.getName(),
         message: content,
       }));
     } catch (e) {
-      console.log('Websocket connection failed');
+      console.log('Websocket connection failed', e);
       this.errorPanel!!.style.opacity = '1';
       this.errorPanel!!.innerText = 'There was an error sending the message!';
       setTimeout(() => { this.errorPanel!!.style.opacity = '' }, 5000);
@@ -243,6 +270,19 @@ export class MainPage implements OnInit {
       prevUser = this.pageMessages.children[0].getAttribute('data-user');
     } catch (e) {}
 
+    //Adds message to server channel
+    this.testUser.getServers().forEach(server => {
+      if (server.getServerID() == pMessage.server) {
+        server.getChannels().forEach(channel => {
+          if (channel.getName() == pMessage.channel) { channel.addMessage(pMessage); }
+          if (server.getName() != this.activeServer?.getServerID() && channel.getName() != this.activeChannel?.getName()) {
+            //Stops if the user isn't currently in the channel
+            return;
+          }
+        })
+      }
+    })
+
     let message: string
     if (prevUser != null && prevUser == 'RedThunder117') {
       message = "<div class='user_message shortened_msg' data-user=" + pMessage.user + " data-time=" + pMessage.time + "><div class=\"user_message_content\">" + pMessage.message + "</div><div class='shortened_msg_time'>" + pMessage.time + "</div></div>"
@@ -255,6 +295,19 @@ export class MainPage implements OnInit {
 
   navAccountPage() {
 
+  }
+
+  displayUsers() {
+    let userlist = document.createElement("ul");
+    userlist.id = 'user_list';
+    console.log(this.activeServer?.getUsers());
+    this.activeServer?.getUsers().forEach(user => {
+      let userhtml = document.createElement("li");
+      userhtml.className = 'list_user';
+      userhtml.innerText = user.getName();
+      userlist.appendChild(userhtml);
+    })
+    this.panel.appendChild(userlist);
   }
 
 }

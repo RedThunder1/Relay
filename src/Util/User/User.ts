@@ -16,7 +16,7 @@ export class User {
     this.servers = [];
   }
 
-  public getName(): String {return this.name;}
+  public getName(): string {return this.name;}
   public setName(name: string) {
     //Verify this can be a name
     this.name = name;
@@ -27,6 +27,8 @@ export class User {
     //Verify it's a correct email
     this.email = email;
   }
+
+  public getUserID(): string { return this.userID;}
 
   public getPassword(): string { return this.password; }
   public setPassword(email: string) {
@@ -43,7 +45,4 @@ export class User {
       }
     }
   }
-
-
-
 }
